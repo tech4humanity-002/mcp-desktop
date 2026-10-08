@@ -1,9 +1,182 @@
-<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>MCP Desktop</title><link rel="icon" href="https://pflisxkcxbzboxwidywf.supabase.co/storage/v1/object/public/images/AHC%20droid%20head.webp"><style>
-:root{font:14px system-ui;color:#e8edf4;background:#0b0e12}*{box-sizing:border-box}body{margin:0;height:100vh;overflow:hidden}button,select,textarea,input{font:inherit}button{cursor:pointer}.app{height:100vh;display:grid;grid-template-columns:205px 1fr 270px}.side,.right{background:#0d1116;padding:14px}.side{border-right:1px solid #282e37}.right{border-left:1px solid #282e37}.brand{font-weight:800;letter-spacing:.1em;margin-bottom:16px}.brand img{width:29px;height:29px;vertical-align:middle;border-radius:8px;margin-right:8px}.nav button,.ws{display:block;width:100%;text-align:left;background:transparent;color:#adb7c4;border:0;padding:8px;border-radius:7px}.nav .active,.ws.active{background:#181e25;color:#fff}.label{font-size:10px;color:#687484;letter-spacing:.1em;margin:16px 0 6px}.main{display:grid;grid-template-rows:58px 1fr 105px}.top{display:flex;align-items:center;gap:8px;padding:10px;border-bottom:1px solid #282e37}.sp{flex:1}.top button,.pill{background:#151b22;color:#c3ccd7;border:1px solid #343c47;border-radius:8px;padding:7px 10px}.panes{display:grid;grid-template-columns:repeat(3,minmax(230px,1fr));gap:9px;padding:10px;overflow:auto}.pane{border:1px solid #282e37;border-radius:9px;background:#11161d;display:grid;grid-template-rows:44px 1fr;min-height:400px}.panehead{display:flex;padding:7px;border-bottom:1px solid #282e37}.panehead select{flex:1;background:#141a21;color:#dce4ed;border:1px solid #343c47;border-radius:7px}.panehead button{background:transparent;border:0;color:#778}.msgs{padding:11px;overflow:auto}.msg{white-space:pre-wrap;line-height:1.5;margin-bottom:10px}.user{margin-left:auto;max-width:90%;background:#1a2736;padding:9px;border-radius:10px}.compose{border-top:1px solid #282e37;padding:9px}.drop{border:1px dashed #3c4551;color:#788493;padding:6px;margin-bottom:6px;font-size:11px}.box{display:flex;gap:8px;background:#131920;border:1px solid #35404c;border-radius:9px;padding:7px}.box textarea{flex:1;min-height:58px;background:transparent;color:#fff;border:0;outline:0;resize:none}.send{background:#edf0f4;color:#090c10;border:0;border-radius:7px;padding:9px 14px}.card{background:#11161d;border:1px solid #282e37;border-radius:9px;padding:10px;margin-bottom:8px}.idea{width:100%;text-align:left;background:#151b22;color:#dce4ed;border:1px solid #303944;border-radius:7px;padding:8px;margin:3px 0}.idea small{display:block;color:#737f8e;margin-top:3px}.toggle{display:flex;justify-content:space-between;padding:6px;font-size:11px;color:#c0c8d3}@media(max-width:1000px){.app{grid-template-columns:175px 1fr}.right{display:none}}@media(max-width:650px){.app{grid-template-columns:1fr}.side{display:none}.panes{grid-template-columns:1fr}}
-</style></head><body><div class="app"><aside class="side"><div class="brand"><img src="https://pflisxkcxbzboxwidywf.supabase.co/storage/v1/object/public/images/AHC%20droid%20head.webp">OIKOS · MCP DESKTOP</div><div class="nav"><button class="active">Conversations</button><button>Workspaces</button><button>Models & tokens</button><button>Plugins</button><button>Instructions & recipes</button><button>Automation</button></div><div class="label">WORKSPACES</div><button class="ws active">Personal</button><button class="ws">Project</button><button id="connect">Connect account</button></aside><main class="main"><header class="top"><b>Conversations</b><div class="sp"></div><span class="pill">BYOK · session</span><button id="broadcast">Broadcast: ON</button><button id="add">+ Pane</button></header><div id="panes" class="panes"></div><div class="compose"><div id="drop" class="drop">Drop a document, transcript, CSV, JSON or text here to extract it.</div><form id="form"><div class="box"><textarea id="q" placeholder="Ask once. Broadcast to the active conversations."></textarea><button class="send">Send</button></div></form><div id="receipt" style="font-size:10px;color:#687484"></div></div></main><aside class="right"><div class="card"><b>Start with a conversation</b><button class="idea" data-p="Pressure-test this idea from five perspectives: customer, operator, finance, risk and contrarian.">Test an idea<small>5-person challenge</small></button><button class="idea" data-p="Build and critique a marketing campaign using strategy, creative, customer, commercial and risk perspectives.">Marketing campaign<small>strategy + creative + commercial</small></button><button class="idea" data-p="Make a decision. Compare options, evidence gaps and a recommended path.">Make a decision<small>decision team</small></button><button class="idea" data-p="Research this topic. Find evidence, contradictions, unknowns and next actions.">Research a topic<small>research team</small></button></div><div class="card"><b>Import & extract</b><label class="toggle">Summarise <input id="summary" type="checkbox" checked></label><label class="toggle">Extract actions & evidence <input type="checkbox" checked></label><label class="toggle">Keep receipts <input type="checkbox" checked></label></div><div class="card"><b>Plugins</b><label class="toggle">Agent Teams <input type="checkbox"></label><label class="toggle">Web search <input type="checkbox"></label><label class="toggle">Automation tasks <input type="checkbox"></label><label class="toggle">Shell <input type="checkbox"></label></div></aside></div>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>OIKOS · Portfolio Design Operating System</title>
+<link rel="icon" href="https://pflisxkcxbzboxwidywf.supabase.co/storage/v1/object/public/images/AHC%20droid%20head.webp">
+<style>
+:root{--ink:#17181a;--muted:#73706a;--paper:#f5f1e8;--paper2:#fffdf8;--line:#d9d2c5;--accent:#17181a;--warm:#e8dfd0;--good:#2f6d50;--bad:#9b433d;font:14px Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+*{box-sizing:border-box}body{margin:0;height:100vh;overflow:hidden;background:#222;color:var(--ink)}button,select,textarea,input{font:inherit}button{cursor:pointer}
+.app{height:100vh;display:grid;grid-template-columns:220px 1fr 292px}
+.side{background:#202122;color:#eee;padding:20px 15px;border-right:1px solid #393939}.brand{display:flex;align-items:center;gap:10px;margin-bottom:25px}.brand img{width:36px;height:36px;border-radius:11px}.brand b{display:block;font-size:16px;letter-spacing:.18em}.brand span{display:block;color:#aaa;font-size:9px;letter-spacing:.12em;margin-top:2px}
+.nav button,.ws{width:100%;text-align:left;background:transparent;color:#bbb;border:0;padding:10px 11px;border-radius:8px;margin:2px 0}.nav button:hover,.nav .active,.ws.active{background:#303132;color:#fff}.label{font-size:9px;color:#777;letter-spacing:.16em;margin:24px 10px 7px}.side .connect{margin-top:7px;width:100%;border:1px solid #4a4a4a;background:#2c2d2e;color:#fff;border-radius:8px;padding:9px}.side .mini{display:flex;gap:6px;margin-top:8px}.side .mini button{flex:1;border:1px solid #444;background:#292a2b;color:#bbb;border-radius:7px;padding:7px;font-size:11px}
+.main{min-width:0;background:var(--paper);display:grid;grid-template-rows:auto 1fr auto}.hero{background:var(--paper2);border-bottom:1px solid var(--line);padding:18px 24px 14px;box-shadow:0 2px 12px #0000000a}.heroTop{display:flex;align-items:flex-start;gap:18px}.hero h1{margin:0;font-size:28px;letter-spacing:.02em}.hero .sub{margin-top:3px;color:var(--muted);font-size:12px}.hero .links{margin-left:auto;display:flex;gap:7px}.hero .links button{border:0;background:transparent;color:#5e5a53;padding:5px 7px;text-decoration:underline;text-underline-offset:3px}.context{display:flex;align-items:center;gap:8px;margin-top:13px}.context .chip,.status{border:1px solid var(--line);background:#f8f4ec;border-radius:999px;padding:5px 9px;font-size:10px;color:#625e57}.status{color:var(--good);border-color:#bdd1c4;background:#f1f7f3}.question{margin-top:13px;background:#171717;color:#fff;border-radius:13px;padding:15px 17px;display:flex;gap:12px;align-items:flex-end}.question textarea{flex:1;min-height:76px;background:transparent;color:#fff;border:0;outline:0;resize:none;font-size:21px;line-height:1.35}.question textarea::placeholder{color:#858585}.question button{background:#fff;color:#111;border:0;border-radius:9px;padding:10px 14px;font-weight:700}.question .secondary{background:#333;color:#eee}
+.toolbar{display:flex;align-items:center;gap:8px;margin-top:10px}.toolbar button,.toolbar select{border:1px solid var(--line);background:#fffaf2;color:#38352f;border-radius:7px;padding:7px 10px}.toolbar .sp{flex:1}.listen{font-size:11px;color:#68635c}.panes{padding:14px 18px 12px;overflow:auto;display:grid;grid-template-columns:repeat(3,minmax(260px,1fr));gap:12px;align-content:start}.pane{background:var(--paper2);border:1px solid var(--line);border-radius:12px;min-height:270px;display:grid;grid-template-rows:auto 1fr}.paneHead{padding:11px 12px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:9px}.avatar{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:#e3dbcd;font-weight:800;font-size:11px}.who{min-width:0;flex:1}.who b{display:block;font-size:12px}.who small{display:block;color:var(--muted);font-size:10px;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.listenBtn{border:1px solid var(--line);background:#fff;border-radius:999px;padding:4px 8px;font-size:10px}.listenBtn.on{background:#171717;color:#fff;border-color:#171717}.paneBody{padding:12px;overflow:auto;max-height:310px}.answer{white-space:pre-wrap;line-height:1.55;font-size:13px}.empty{color:#aaa49a;font-size:12px}.paneFoot{display:flex;gap:5px;margin-top:10px}.paneFoot button{border:1px solid var(--line);background:#fffaf2;border-radius:6px;padding:5px 7px;font-size:10px;color:#625e57}.err{color:var(--bad);background:#fbefed;border-radius:7px;padding:7px}.composer{padding:9px 18px 13px;border-top:1px solid var(--line);background:#eee8dc}.drop{font-size:10px;color:#7c766d;margin-bottom:6px}.drop input{display:none}.drop label{cursor:pointer;text-decoration:underline}.right{background:#f1ece3;border-left:1px solid #d2cabd;padding:15px;overflow:auto}.card{background:#fffaf2;border:1px solid var(--line);border-radius:11px;padding:11px;margin-bottom:10px}.card h3{margin:0 0 8px;font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:#676158}.card p{font-size:11px;line-height:1.45;color:#6c675f;margin:5px 0}.idea{width:100%;text-align:left;border:1px solid var(--line);background:#fffdf8;border-radius:8px;padding:9px;margin:3px 0;color:#282622}.idea:hover{border-color:#a7a092;background:#f7f0e5}.idea b{display:block;font-size:12px}.idea small{color:#817b71}.row{display:flex;align-items:center;justify-content:space-between;gap:7px;padding:7px 0;border-bottom:1px solid #e5ded2;font-size:11px}.row:last-child{border-bottom:0}.action{display:flex;gap:6px;align-items:flex-start}.action input{margin-top:3px}.timer{font-size:24px;font-variant-numeric:tabular-nums}.timerBtns{display:flex;gap:5px}.timerBtns button{flex:1;border:1px solid var(--line);background:#fff;border-radius:6px;padding:6px;font-size:10px}.modal{position:fixed;inset:0;background:#0008;display:none;place-items:center;z-index:10}.modal.show{display:grid}.dialog{width:min(520px,90vw);background:var(--paper2);border-radius:14px;padding:20px;border:1px solid var(--line);box-shadow:0 20px 80px #0005}.dialog h2{margin:0 0 12px}.dialog p{color:var(--muted);font-size:12px;line-height:1.5}.dialog .close{float:right;border:0;background:transparent;font-size:22px}.dialog select,.dialog input{width:100%;padding:9px;border:1px solid var(--line);border-radius:7px;background:#fff;margin:5px 0 10px}.dialog .primary{background:#171717;color:#fff;border:0;border-radius:8px;padding:9px 13px}
+@media(max-width:1150px){.app{grid-template-columns:190px 1fr}.right{display:none}.panes{grid-template-columns:repeat(2,minmax(250px,1fr))}}
+@media(max-width:760px){body{overflow:auto}.app{height:auto;min-height:100vh;display:block}.side{display:none}.panes{grid-template-columns:1fr}.hero{padding:14px}.question textarea{font-size:18px}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="side">
+  <div class="brand"><img src="https://pflisxkcxbzboxwidywf.supabase.co/storage/v1/object/public/images/AHC%20droid%20head.webp"><div><b>OIKOS</b><span>PORTFOLIO DESIGN OPERATING SYSTEM</span></div></div>
+  <div class="nav">
+    <button class="active" data-view="conversation">Conversations</button>
+    <button data-view="workspace">Workspaces</button>
+    <button data-view="models">Models & tokens</button>
+    <button data-view="plugins">Capabilities</button>
+    <button data-view="instructions">Instructions & recipes</button>
+    <button data-view="automation">Automation</button>
+  </div>
+  <div class="label">WORKSPACE</div>
+  <button class="ws active" data-workspace="Personal">Personal</button>
+  <button class="ws" data-workspace="Project">Project</button>
+  <button class="connect" id="connect">Connect account</button>
+  <div class="mini"><button id="save">Save</button><button id="new">New</button></div>
+  <div class="label">RUNTIME</div>
+  <div style="font-size:10px;color:#777;line-height:1.5;padding:0 10px">Cloudflare runtime<br>Supabase conversation persistence<br><span id="persistState">checking…</span></div>
+</aside>
+
+<main class="main">
+<header class="hero">
+  <div class="heroTop">
+    <div><h1>OIKOS</h1><div class="sub">Portfolio Design Operating System · think together, decide, act, keep the evidence</div></div>
+    <div class="links"><button id="about">What OIKOS does</button><button id="how">Instructions</button></div>
+  </div>
+  <div class="context"><span class="chip" id="workspaceChip">Personal</span><span class="chip" id="groupChip">Core group · 6</span><span class="status" id="runtimeStatus">● runtime checking</span><span class="sp" style="flex:1"></span><span class="chip" id="timerChip">No timer</span></div>
+  <div class="question"><textarea id="q" placeholder="Put the question here. One question. One shared context."></textarea><button id="send">Ask group</button></div>
+  <div class="toolbar">
+    <span class="listen">LISTEN TO</span><button id="all">All</button><button id="none">None</button><button id="synth">Chairman · synthesise</button><button id="addPerson">+ Person</button><div class="sp"></div><select id="group"><option value="6">Core group · 6</option><option value="5">Small group · 5</option><option value="15">Extended group · 15</option></select>
+  </div>
+</header>
+
+<div id="panes" class="panes"></div>
+
+<div class="composer">
+  <div class="drop">Drop a document, transcript, CSV, JSON or text here · <label for="file">choose a file</label><input id="file" type="file"></div>
+</div>
+</main>
+
+<aside class="right">
+  <div class="card"><h3>Start with a conversation</h3>
+    <button class="idea" data-p="Make a decision. Compare options, evidence gaps, risks and a recommended path."><b>Make a decision</b><small>decision team</small></button>
+    <button class="idea" data-p="Test this idea from customer, operator, finance, risk and contrarian perspectives."><b>Test an idea</b><small>small group challenge</small></button>
+    <button class="idea" data-p="Research this topic. Separate what is known, contested, missing and worth doing next."><b>Research a topic</b><small>evidence + unknowns + next actions</small></button>
+    <button class="idea" data-p="Build a marketing campaign and challenge the strategy, creative, customer and commercial case."><b>Marketing campaign</b><small>strategy + creative + commercial</small></button>
+  </div>
+  <div class="card"><h3>Choose who you hear</h3><div class="row"><span>All voices</span><button id="listenCount" class="listenBtn on">6 listening</button></div><p>Every person can think, but you choose who is in the room when the answer comes back.</p></div>
+  <div class="card"><h3>Actions caught live</h3><div id="actions"><p>No actions captured yet.</p></div><button id="clearActions" style="width:100%;border:1px solid var(--line);background:#fff;border-radius:7px;padding:7px;font-size:10px">Clear actions</button></div>
+  <div class="card"><h3>Timer / alarm</h3><div class="timer" id="timer">10:00</div><div class="timerBtns"><button data-min="1">1 min</button><button data-min="10">10 min</button><button data-min="25">25 min</button><button id="timerStop">Stop</button></div></div>
+  <div class="card"><h3>Export</h3><div class="timerBtns"><button id="exportMd">Markdown</button><button id="exportJson">JSON</button><button id="copy">Copy</button></div></div>
+  <div class="card"><h3>Scratch pad</h3><textarea id="scratch" style="width:100%;min-height:120px;border:0;outline:0;resize:vertical;background:#fffdf8;color:#444;font-size:12px;line-height:1.5" placeholder="Notes, fragments, decisions, things to check…"></textarea></div>
+</aside>
+</div>
+
+<div class="modal" id="modal"><div class="dialog"><button class="close" id="close">×</button><div id="dialogBody"></div></div></div>
+
 <script>
-const M=[["openai/gpt-5-mini","GPT-5 mini"],["anthropic/claude-sonnet-4","Claude Sonnet"],["google/gemini-2.5-flash","Gemini Flash"],["x-ai/grok-4","Grok"],["deepseek/deepseek-flash","DeepSeek"],["perplexity/sonar-pro","Perplexity"]],$=id=>document.getElementById(id);let lanes=M.slice(0,3).map(x=>({model:x[0],history:[]})),broadcast=true;
-function draw(){$("panes").innerHTML=lanes.map((l,i)=>'<section class="pane"><div class="panehead"><select data-model="'+i+'">'+M.map(m=>'<option value="'+m[0]+'" '+(m[0]===l.model?"selected":"")+'>'+m[1]+'</option>').join("")+'</select><button data-remove="'+i+'">×</button></div><div class="msgs">'+(l.history.length?l.history.map(m=>'<div class="msg '+(m.role==="user"?"user":"")+'"><small>'+m.role+' · '+l.model+'</small><br>'+String(m.content).replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]))+'</div>').join(""):'<div style="color:#697586">One conversation pane.<br>Pick a model or add another.</div>')+'</div></section>').join("");document.querySelectorAll("[data-model]").forEach(x=>x.onchange=e=>{lanes[+e.target.dataset.model].model=e.target.value;draw()});document.querySelectorAll("[data-remove]").forEach(x=>x.onclick=()=>{if(lanes.length>1){lanes.splice(+x.dataset.remove,1);draw()}})}
-async function run(l,text){l.history.push({role:"user",content:text},{role:"assistant",content:""});draw();const h={"content-type":"application/json"},key=sessionStorage.getItem("mcpdt");if(key)h["x-mcp-desktop-openrouter-key"]=key;const r=await fetch("https://t4h-universal-chat.troy-latter.workers.dev/api/chat/stream",{method:"POST",headers:h,body:JSON.stringify({messages:l.history,model:l.model,metadata:{surface:"mcp-desktop"}})});if(!r.ok)throw Error((await r.text()).slice(0,300));const rd=r.body.getReader(),d=new TextDecoder();let b="";for(;;){const z=await rd.read();if(z.done)break;b+=d.decode(z.value,{stream:true});const parts=b.split("\n\n");b=parts.pop()||"";for(const part of parts){const line=part.split("\n").find(x=>x.startsWith("data: "));if(!line)continue;const x=JSON.parse(line.slice(6));if(x.type==="delta"){l.history[l.history.length-1].content+=x.content;draw()}if(x.type==="done")$("receipt").textContent="REAL · "+x.actual_model+" · "+x.latency_ms+"ms · receipt "+x.receipt_id}}}
-$("form").onsubmit=async e=>{e.preventDefault();const t=$("q").value.trim();if(!t)return;$("q").value="";await Promise.all((broadcast?lanes:[lanes[0]]).map(l=>run(l,t).catch(x=>{l.history.push({role:"assistant",content:"Error: "+x.message});draw()})))};$("broadcast").onclick=()=>{broadcast=!broadcast;$("broadcast").textContent=broadcast?"Broadcast: ON":"Broadcast: OFF"};$("add").onclick=()=>{lanes.push({model:M[lanes.length%M.length][0],history:[]});draw()};document.querySelectorAll("[data-p]").forEach(b=>b.onclick=()=>{$("q").value=b.dataset.p;$("q").focus()});$("drop").ondragover=e=>e.preventDefault();$("drop").ondrop=async e=>{e.preventDefault();const f=e.dataTransfer.files[0];if(!f)return;const text=await f.text();$("q").value=($("summary").checked?"Summarise and extract facts, decisions, actions, evidence and unanswered questions from this material.\n\n":"Review this material.\n\n")+text.slice(0,30000);$("receipt").textContent="Imported "+f.name+" · ready to process"};$("connect").onclick=()=>{const k=prompt("OpenRouter token. Stored in this browser session only.");if(k)sessionStorage.setItem("mcpdt",k)};draw();
-</script></body></html>
+const runtime="https://t4h-universal-chat.troy-latter.workers.dev";
+const d=id=>document.getElementById(id);
+const baseModels=[
+ ["openai/gpt-5-mini","GPT-5 mini"],
+ ["anthropic/claude-sonnet-4","Claude Sonnet"],
+ ["google/gemini-2.5-flash","Gemini Flash"],
+ ["x-ai/grok-4.6","Grok"],
+ ["deepseek/deepseek-v4-flash-0731","DeepSeek"],
+ ["perplexity/sonar-pro","Perplexity"]
+];
+const roles=["Chairman","Scribe","Customer","Operator","Finance","Risk","Contrarian","Researcher","Commercial","Creative","Engineer","Evidence","Futurist","Challenger","Synthesiser"];
+const rolePrompts={
+ Chairman:"You are the chairman. Keep the group focused on the question, identify the strongest arguments, expose disagreement and end with a clear recommendation.",
+ Scribe:"You are the scribe. Capture decisions, evidence, unresolved questions and concrete actions. Be precise and economical.",
+ Customer:"Think from the customer's perspective. Focus on value, friction, adoption and what would make this succeed or fail.",
+ Operator:"Think like the person who must make this work in reality. Focus on dependencies, execution, effort, failure modes and operational proof.",
+ Finance:"Test the economics, commercial logic, costs, incentives and opportunity cost.",
+ Risk:"Look for material risks, hidden assumptions, governance issues and ways the proposal could fail.",
+ Contrarian:"Challenge the consensus. Find the strongest reason the obvious answer may be wrong.",
+ Researcher:"Separate known facts from inference. Identify evidence gaps and the next useful research.",
+ Commercial:"Test market, proposition, pricing, route to market and commercial viability.",
+ Creative:"Look for a better framing, experience or way to make the idea compelling.",
+ Engineer:"Think about technical feasibility, interfaces, reliability and proof.",
+ Evidence:"Ask what can actually be observed, measured, replayed or evidenced.",
+ Futurist:"Consider second-order effects and how the system changes if the idea works.",
+ Challenger:"Pressure-test the proposal with hard questions and alternatives.",
+ Synthesiser:"Combine the strongest points, contradictions and evidence into a coherent answer."
+};
+let models=baseModels.slice(),lanes=[],broadcast=true,workspace="Personal",currentConversation=null,actions=[],timerId=null,seconds=600;
+
+function esc(s){return String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
+function makeGroup(n){
+ lanes=[];
+ for(let i=0;i<n;i++) lanes.push({name:roles[i],role:roles[i],model:models[i%models.length][0],modelName:models[i%models.length][1],listen:true,history:[],conversationId:null,state:"READY",receipt:null});
+ d("groupChip").textContent=(n===5?"Small group":n===15?"Extended group":"Core group")+" · "+n;
+ draw();
+}
+function draw(){
+ d("panes").innerHTML=lanes.map((l,i)=>`<section class="pane">
+ <div class="paneHead"><div class="avatar">${esc(l.name.slice(0,2).toUpperCase())}</div><div class="who"><b>${esc(l.name)}</b><small>${esc(l.modelName)} · ${esc(l.state)}</small></div><button class="listenBtn ${l.listen?"on":""}" data-listen="${i}">${l.listen?"Listening":"Muted"}</button><button class="listenBtn" data-edit="${i}">Edit</button></div>
+ <div class="paneBody"><div class="${l.state==="DEGRADED"?"answer err":"answer"}">${l.history.length?l.history.map(m=>m.role==="assistant"?esc(m.content):"").join(""):"<span class='empty'>Waiting for the shared question.</span>"}</div>
+ <div class="paneFoot"><button data-action="${i}">+ Capture action</button><button data-reask="${i}">Ask again</button></div></div></section>`).join("");
+ document.querySelectorAll("[data-listen]").forEach(b=>b.onclick=()=>{lanes[+b.dataset.listen].listen=!lanes[+b.dataset.listen].listen;draw();updateListen()});
+ document.querySelectorAll("[data-action]").forEach(b=>b.onclick=()=>captureAction(+b.dataset.action));
+ document.querySelectorAll("[data-reask]").forEach(b=>b.onclick=()=>{if(d("q").value.trim())runLane(lanes[+b.dataset.reask],d("q").value.trim())});
+ document.querySelectorAll("[data-edit]").forEach(b=>b.onclick=()=>editPerson(+b.dataset.edit));
+}
+function updateListen(){d("listenCount").textContent=lanes.filter(x=>x.listen).length+" listening";d("listenCount").classList.toggle("on",lanes.some(x=>x.listen))}
+function systemFor(l){return rolePrompts[l.role]+"\n\nDo not repeat the user's question. Answer the shared question directly. If there are concrete next steps, finish with a short ACTIONS: section using one action per line."}
+function historyFor(l){return [{role:"system",content:systemFor(l)},...l.history]}
+async function runLane(l,text){
+ l.state="THINKING";l.history.push({role:"user",content:text},{role:"assistant",content:""});draw();
+ const h={"content-type":"application/json"},key=sessionStorage.getItem("mcpdt");if(key)h["x-mcp-desktop-openrouter-key"]=key;
+ try{
+  const body={messages:historyFor(l),model:l.model,conversation_id:l.conversationId,metadata:{surface:"oikos-desktop",workspace,role:l.role,external_id:"oikos-"+workspace.toLowerCase()}};
+  const r=await fetch(runtime+"/api/chat/stream",{method:"POST",headers:h,body:JSON.stringify(body)});
+  if(!r.ok)throw Error((await r.text()).slice(0,300));
+  const rd=r.body.getReader(),dec=new TextDecoder();let buf="";
+  while(true){const z=await rd.read();if(z.done)break;buf+=dec.decode(z.value,{stream:true});const parts=buf.split("\n\n");buf=parts.pop()||"";
+   for(const part of parts){const line=part.split("\n").find(x=>x.startsWith("data: "));if(!line)continue;let x;try{x=JSON.parse(line.slice(6))}catch{continue}
+    if(x.type==="delta"){l.history[l.history.length-1].content+=x.content;draw();detectActions(l,x.content)}
+    if(x.type==="done"){l.conversationId=x.conversation_id;l.receipt=x.receipt_id;l.state="REAL";d("runtimeStatus").textContent="● runtime REAL · receipt received";d("runtimeStatus").style.color="var(--good)"}
+    if(x.type==="error"){throw Error(x.error||"runtime error")}
+   }
+  }
+ }catch(e){l.state="DEGRADED";l.history[l.history.length-1].content="Error: "+e.message;d("runtimeStatus").textContent="● runtime DEGRADED";d("runtimeStatus").style.color="var(--bad)"}
+ draw();
+}
+function detectActions(l,chunk){
+ const lines=chunk.split(/\n/).filter(x=>/^\s*(ACTION|NEXT|TODO)\s*[:\-]/i.test(x));
+ lines.forEach(x=>{const t=x.replace(/^\s*(ACTION|NEXT|TODO)\s*[:\-]\s*/i,"").trim();if(t&&!actions.some(a=>a.text===t)){actions.push({text:t,from:l.name,done:false});renderActions()}});
+}
+function renderActions(){d("actions").innerHTML=actions.length?actions.map((a,i)=>`<label class="action"><input type="checkbox" data-act="${i}" ${a.done?"checked":""}><span>${esc(a.text)}<small style="display:block;color:#999">${esc(a.from)}</small></span></label>`).join(""):"<p>No actions captured yet.</p>";document.querySelectorAll("[data-act]").forEach(x=>x.onchange=()=>actions[+x.dataset.act].done=x.checked)}
+function captureAction(i){const t=prompt("Action to capture from "+lanes[i].name);if(t){actions.push({text:t,from:lanes[i].name,done:false});renderActions()}}
+async function ask(){const text=d("q").value.trim();if(!text)return;const selected=lanes.filter(l=>l.listen);if(!selected.length){alert("Choose at least one person to listen to.");return}await Promise.all(selected.map(l=>runLane(l,text)))}
+function editPerson(i){showModal(`<h2>Edit person</h2><label>Name<input id="mname" value="${esc(lanes[i].name)}"></label><label>Role<select id="mrole">${roles.map(r=>`<option ${r===lanes[i].role?"selected":""}>${r}</option>`).join("")}</select></label><label>Model<select id="mmodel">${models.map(m=>`<option value="${esc(m[0])}" ${m[0]===lanes[i].model?"selected":""}>${esc(m[1])}</option>`).join("")}</select></label><button class="primary" id="mapply">Save</button>`);d("mapply").onclick=()=>{lanes[i].name=d("mname").value||lanes[i].role;lanes[i].role=d("mrole").value;lanes[i].model=d("mmodel").value;lanes[i].modelName=models.find(m=>m[0]===lanes[i].model)?.[1]||lanes[i].model;closeModal();draw()}}
+function addPerson(){showModal(`<h2>Add a person</h2><p>This is a role in the room, not a new provider account.</p><label>Name<input id="mname" placeholder="e.g. Legal"></label><label>Role<select id="mrole">${roles.map(r=>`<option>${r}</option>`).join("")}</select></label><label>Model<select id="mmodel">${models.map(m=>`<option value="${esc(m[0])}">${esc(m[1])}</option>`).join("")}</select></label><button class="primary" id="mapply">Add person</button>`);d("mapply").onclick=()=>{const m=models.find(m=>m[0]===d("mmodel").value)||models[0];lanes.push({name:d("mname").value||d("mrole").value,role:d("mrole").value,model:m[0],modelName:m[1],listen:true,history:[],conversationId:null,state:"READY",receipt:null});closeModal();draw();d("groupChip").textContent="Custom group · "+lanes.length;updateListen()}}
+function synth(){const chairman=lanes.find(l=>l.role==="Chairman")||lanes[0];const q=d("q").value.trim();if(!q||!chairman)return;const latest=lanes.filter(l=>l.history.length).map(l=>l.name+" ("+l.modelName+"):\n"+l.history.filter(x=>x.role==="assistant").at(-1)?.content).join("\n\n---\n\n");const prompt="SYNTHESIS REQUEST\nShared question: "+q+"\n\nGroup responses:\n"+latest+"\n\nAs chairman, reconcile agreement and disagreement, state what is actually known, make a recommendation and list actions.";runLane(chairman,prompt)}
+function showModal(body){d("dialogBody").innerHTML=body;d("modal").classList.add("show")}function closeModal(){d("modal").classList.remove("show")}
+function exportText(){return "# OIKOS session\n\n## Question\n"+d("q").value+"\n\n## Responses\n"+lanes.map(l=>"### "+l.name+" · "+l.modelName+"\n"+l.history.filter(x=>x.role==="assistant").at(-1)?.content||"").join("\n\n")+"\n\n## Actions\n"+actions.map(a=>"- ["+(a.done?"x":" ")+"] "+a.text+" — "+a.from).join("\n")}
+function download(name,content,type){const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([content],{type}));a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),500)}
+function startTimer(min){clearInterval(timerId);seconds=min*60;d("timer").textContent=fmt(seconds);d("timerChip").textContent=min+" minute timer";timerId=setInterval(()=>{seconds--;d("timer").textContent=fmt(Math.max(0,seconds));if(seconds<=0){clearInterval(timerId);d("timerChip").textContent="TIME";try{new AudioContext().resume().then(c=>{const o=c.createOscillator();o.connect(c.destination);o.start();o.stop(c.currentTime+.5)})}catch{}alert("OIKOS timer finished.")}},1000)}
+function fmt(s){return String(Math.floor(s/60)).padStart(2,"0")+":"+String(s%60).padStart(2,"0")}
+async function checkRuntime(){try{const r=await fetch(runtime+"/api/chat/config");const x=await r.json();d("runtimeStatus").textContent="● "+(x.persistence||"runtime")+" · ready";d("persistState").textContent="Supabase persistence: REAL"}catch{d("runtimeStatus").textContent="● runtime unavailable";d("persistState").textContent="Supabase persistence: not reachable"}}
+async function loadModels(){try{const r=await fetch(runtime+"/api/chat/models");const x=await r.json();if(x.models?.length){const pick=p=>x.models.find(m=>m.id.startsWith(p));models=baseModels.map(([id,n])=>{const p=id.split("/")[0]+"/";const m=pick(p);return m?[m.id,n]:[id,n]});}}catch{}}
+function setView(v){showModal("<h2>"+v[0].toUpperCase()+v.slice(1)+"</h2><p>This OIKOS surface is being opened from the desktop. The current conversation stays intact while you work with the portfolio context, models, capabilities, instructions or automation.</p>");}
+d("send").onclick=ask;d("q").addEventListener("keydown",e=>{if((e.metaKey||e.ctrlKey)&&e.key==="Enter")ask()});
+d("all").onclick=()=>{lanes.forEach(l=>l.listen=true);draw();updateListen()};d("none").onclick=()=>{lanes.forEach(l=>l.listen=false);draw();updateListen()};d("listenCount").onclick=()=>lanes.forEach(l=>l.listen=!l.listen)|| (draw(),updateListen());
+d("synth").onclick=synth;d("addPerson").onclick=addPerson;d("group").onchange=e=>makeGroup(+e.target.value);
+document.querySelectorAll(".idea").forEach(b=>b.onclick=()=>{d("q").value=b.dataset.p;d("q").focus()});
+document.querySelectorAll("[data-min]").forEach(b=>b.onclick=()=>startTimer(+b.dataset.min));d("timerStop").onclick=()=>{clearInterval(timerId);d("timerChip").textContent="No timer";d("timer").textContent="10:00"};
+d("clearActions").onclick=()=>{actions=[];renderActions()};d("exportMd").onclick=()=>download("oikos-session.md",exportText(),"text/markdown");d("exportJson").onclick=()=>download("oikos-session.json",JSON.stringify({question:d("q").value,workspace,lanes,actions},null,2),"application/json");d("copy").onclick=async()=>{await navigator.clipboard.writeText(exportText());d("runtimeStatus").textContent="● copied to clipboard"};
+d("save").onclick=()=>{localStorage.setItem("oikos-session",JSON.stringify({question:d("q").value,workspace,lanes,actions,scratch:d("scratch").value}));d("runtimeStatus").textContent="● local session saved"};d("new").onclick=()=>{currentConversation=null;makeGroup(6);d("q").value="";actions=[];renderActions()};
+d("connect").onclick=()=>{const k=prompt("OpenRouter token. Stored in this browser session only.");if(k)sessionStorage.setItem("mcpdt",k)};
+d("file").onchange=async e=>{const f=e.target.files[0];if(!f)return;d("q").value="Review this material. Extract facts, decisions, evidence gaps and actions without repeating the source.\n\n"+(await f.text()).slice(0,50000)};
+d("about").onclick=()=>showModal("<h2>OIKOS</h2><p>OIKOS is the organising system for portfolio thinking and action. It connects context, people, intelligence, evidence, decisions and execution without making the model provider the centre of the experience.</p>");
+d("how").onclick=()=>showModal("<h2>How to use OIKOS</h2><p>Put one question in the shared question area. Choose the people you want to hear. Ask the group. You can mute individuals, add roles, change the group size, capture actions, set a timer, ask the chairman to synthesise and export the session.</p><p>The model is the intelligence engine. The role is what the participant is responsible for. The receipt is the proof of the runtime turn.</p>");
+d("close").onclick=closeModal;d("modal").onclick=e=>{if(e.target===d("modal"))closeModal()};
+document.querySelectorAll("[data-view]").forEach(b=>b.onclick=()=>setView(b.dataset.view));document.querySelectorAll("[data-workspace]").forEach(b=>b.onclick=()=>{workspace=b.dataset.workspace;d("workspaceChip").textContent=workspace;document.querySelectorAll(".ws").forEach(x=>x.classList.toggle("active",x.dataset.workspace===workspace))});
+d("scratch").value=localStorage.getItem("oikos-scratch")||"";d("scratch").oninput=()=>localStorage.setItem("oikos-scratch",d("scratch").value);
+(async()=>{await loadModels();makeGroup(6);await checkRuntime();updateListen()})();
+</script>
+</body>
+</html>
