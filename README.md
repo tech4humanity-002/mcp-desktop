@@ -1,31 +1,42 @@
-MCP Desktop
+# OIKOS
 
-A clean multi-model conversation workspace derived from the MCP Desktop thread.
+**Portfolio Design Operating System**
 
-Product
-- One conversation surface
-- Multiple model panes
-- Broadcast one prompt to multiple models
-- BYOK OpenRouter token held in browser session
-- Drag/drop text, Markdown, CSV and JSON for extraction/summarisation
-- Conversation starters for common team patterns
-- Workspace, model/token, plugin, instructions/recipe and automation entry points
-- OIKOS presentation and T4H droid favicon
+This repository contains the current OIKOS desktop conversation surface. MCP is an implementation capability underneath the product, not the product identity.
 
-Runtime
-The static front end is published on GitHub Pages and calls the existing T4H Universal Chat Cloudflare Worker for model execution.
+## Product surface
+- One shared question, shown once
+- Six core model participants, with 5-person and 15-person group modes
+- Choose who you listen to, or listen to everyone
+- Add people/roles such as Chairman, Scribe, Risk, Finance, Customer and Researcher
+- Chairman synthesis
+- Live action capture
+- Timer/alarm controls
+- Scratch pad
+- Markdown, JSON and clipboard export
+- Document/transcript/CSV/JSON/text import
+- OIKOS branding and light portfolio-workspace treatment
+- Runtime state and receipts surfaced as REAL/DEGRADED
+- Model discovery from the live Universal Chat runtime, while preferring exact configured model IDs
 
-Live: https://tech4humanity-002.github.io/mcp-desktop/
-Runtime: https://t4h-universal-chat.troy-latter.workers.dev/
+## Persistence
+The OIKOS front end sends turns to the existing T4H Universal Chat Cloudflare Worker. That runtime persists conversation messages, executions and receipts in the Supabase conversation/runtime stores. The browser also keeps the BYOK token in session storage only.
 
-Acceptance
-- GitHub Pages status: built
-- Front end HTTP: 200
-- Universal Chat health: HTTP 200
-- Cross-origin API access from GitHub Pages origin: confirmed
-- Live stream acceptance receipt: 49b6c1bf-b962-40bd-8ef2-bb634ba1cd1c
-- Conversation ID: 9e85c1bd-129b-40b9-bb48-03323c2fa965
-- Execution ID: 4a2be907-1f6e-40a2-98f6-863b4060fb18
+The important distinction is:
+- Conversation data: persisted server-side through the Universal Chat runtime/Supabase path.
+- BYOK token: browser session only.
+- Current UI: maintains the active group state in the browser; conversation reload/history browsing is a subsequent surface.
 
-Important boundary
-The current account connection is BYOK/session based, not a provider OAuth login. Plugin and automation controls are currently product-surface controls; their execution is not yet wired into this front end.
+## Runtime
+Live front end: https://tech4humanity-002.github.io/mcp-desktop/
+
+Universal Chat runtime: https://t4h-universal-chat.troy-latter.workers.dev/
+
+## Acceptance already established
+- GitHub Pages front end previously returned HTTP 200.
+- Universal Chat health endpoint previously returned HTTP 200.
+- CORS from the GitHub Pages origin was confirmed.
+- A live model stream previously returned a REAL receipt, conversation ID and execution ID.
+
+## Current boundary
+BYOK is currently OpenRouter/session based, not generic provider OAuth. Plugin/automation navigation is a product surface; actual execution remains dependent on the underlying capability/runtime being wired.
